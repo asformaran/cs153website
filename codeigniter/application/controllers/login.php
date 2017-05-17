@@ -50,9 +50,6 @@ class Login extends CI_Controller {
 			}
 
 			$data['username'] = $result->result_array()[0]['username'];
-			$data['name'] = $result->result_array()[0]['name'];
-			$data['address'] = $result->result_array()[0]['address'];
-			$data['birthday'] = $result->result_array()[0]['birthday'];
 			$data['superuser'] = $result->result_array()[0]['superuser'];
 			$this->session->set_userdata('userinfo', $data);
 			redirect('profile');

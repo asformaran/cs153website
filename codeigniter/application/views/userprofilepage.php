@@ -12,7 +12,7 @@ Birthday: <?php echo "$birthday"; ?> <br>
 
 <button onclick="location.href='profile/onlineusers'">View Online</button>
 <button onclick="location.href='profile/viewbirthdays'">View User Birthdays</button>
-<button onclick="location.href='profile/logout'">Edit Info</button>
+<button onclick="location.href='profile/editself'">Edit Info</button>
 <button onclick="location.href='profile/logout'">Log Out</button>
 
 </body>

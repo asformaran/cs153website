@@ -11,8 +11,8 @@ Address: <?php echo "$address"; ?> <br>
 Birthday: <?php echo "$birthday"; ?> <br>
 
 <button onclick="location.href='profile/onlineusers'">View Online</button>
-<button onclick="location.href='profile/logout'">Edit Info</button>
-<button onclick="location.href='profile/superview?username=<?php echo $username;?>'">View Users</button>
+<button onclick="location.href='profile/editself'">Edit Info</button>
+<button onclick="location.href='profile/superview'">View Users</button>
 <button onclick="location.href='profile/superview'">Create User</button>
 <button onclick="location.href='profile/superview'">Update User</button>
 <button onclick="location.href='profile/superview'">Edit User</button>

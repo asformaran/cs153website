@@ -20,7 +20,7 @@
 	Password: <input type="password" name="password"><br> 
 	<input type="submit" value="Login">
 
-</form>
+<?php echo form_close(); ?>
 
 </body>
 </html>

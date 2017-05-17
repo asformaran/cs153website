@@ -5,6 +5,7 @@ class Profile extends CI_Controller {
 	public function index() {
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->database();
 		$userinfo = $this->session->userdata('userinfo');
 
 		if (!$userinfo){
@@ -12,12 +13,12 @@ class Profile extends CI_Controller {
 		}
 		
 		if ($userinfo['superuser']){
-			$this->superuser = new Superuser($userinfo);
+			$this->superuser = new Superuser($userinfo, $this->db);
 			$this->session->set_userdata('usertype', $this->superuser);
 			$this->superuser->loaduser($this->load);
 		}
 		else{
-			$this->user = new User($userinfo);
+			$this->user = new User($userinfo, $this->db);
 			$this->session->set_userdata('usertype', $this->user);
 			$this->user->loaduser($this->load);
 		}
@@ -66,7 +67,42 @@ class Profile extends CI_Controller {
 			$user->birthdays($this->load, $this->db);
 		}
 		else {
+			redirect('profile');
+		}
+	}
+
+	public function editself() {
+		$this->load->library('session');
+		$this->load->database();
+		$this->load->helper('url');
+		$this->load->library('form_validation');
+
+		if (!$this->session->userdata('usertype')) {
 			redirect('login');
+		}
+
+		$user = $this->session->userdata('usertype');
+		$data['name'] = $user->info['name'];
+		$data['address'] = $user->info['address'];
+		$data['birthday'] = $user->info['birthday'];
+
+		$this->form_validation->set_rules('birthday', 'Birthday', 'required', array('required' => '%s should be in date format.'));
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('editinfo', $data);
+		}
+		else{
+			$this->db->select('*');
+			$this->db->where('username',$user->info['username']);
+			$result = $this->db->get('sessions');
+
+			if ($result->num_rows() > 0){
+				$this->session->sess_regenerate();
+				$user->editinfo($this->input, $this->session, $this->load, $this->db);
+			}
+			else {
+				redirect('login');
+			}
 		}
 	}
 
@@ -87,11 +123,14 @@ class Profile extends CI_Controller {
 
 class User {
 
-	public function __construct($userinfo) {
+	public function __construct($userinfo, $db) {
+		$db->select('name, address, birthday');
+		$db->where('username', $userinfo['username']);
+		$result = $db->get('users');
 		$this->info['username'] = $userinfo['username'];
-		$this->info['name'] = $userinfo['name'];
-		$this->info['address'] = $userinfo['address'];
-		$this->info['birthday'] = $userinfo['birthday'];
+		$this->info['name'] = $result->result_array()[0]['name'];
+		$this->info['address'] = $result->result_array()[0]['address'];
+		$this->info['birthday'] = $result->result_array()[0]['birthday'];
 		$this->info['superuser'] = $userinfo['superuser'];
 	}
 
@@ -100,8 +139,13 @@ class User {
 		$load->view('userprofilepage', $this->info);
 	}
 
-	public function editinfo() {
+	public function editinfo($input, $session, $load, $db) {
 
+		$load->helper('url');
+		$newinfo = $input->post();
+		$db->where('username', $this->info['username']);
+		$db->update('users', array('name' => $newinfo['name'], 'address' => $newinfo['address'], 'birthday' => $newinfo['birthday']));
+		redirect('profile');		
 	}
 
 	public function onlines($load, $db){
