@@ -14,6 +14,7 @@
 
     <?php endforeach;?>
 </ul>
+<button onclick="location.href='<?php echo base_url();?>profile'">Back</button>
 
 </body>
 </html>

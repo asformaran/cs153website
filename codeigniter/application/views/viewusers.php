@@ -10,10 +10,11 @@
 <ul>
     <?php foreach ($users as $user):?>
 
-        <li><?php echo $user['name'] . " " . $user['address'] . " " . $user['birthday'];?></li>
+        <li><?php echo $user['name'] . ", " . $user['address'] . ", " . $user['birthday'];?></li>
 
     <?php endforeach;?>
 </ul>
+<button onclick="location.href='<?php echo base_url();?>profile'">Back</button>
 
 </body>
 </html>

@@ -19,10 +19,12 @@
 	Name: <input type="text" name="name" value = "<?php echo $name;?>"><br>
 	Address: <input type="text" name="address" value = "<?php echo $address; ?>"><br> 
 	Birthday: <input type='date' name='birthday' value = "<?php echo $birthday; ?>"><br>
-	<input type="submit" name='submitted' value="Update">
-	<input type="submit" name='cancelled' value="Back">
+	<input type="submit" value="Update">
+	<button onclick="history.go(-1);">Back </button>
 
 <?php echo form_close(); ?>
+
+<a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/66.175.217.252"><img src="https://seal.beyondsecurity.com/verification-images/66.175.217.252/vulnerability-scanner-2.gif" alt="Website Security Test" border="0" /></a>
 
 </body>
 </html>

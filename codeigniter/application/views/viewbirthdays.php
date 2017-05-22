@@ -13,6 +13,8 @@
         <li><?php echo $user['username'] . "," . $user['name'] . "," . $user['birthday'];?></li>
 
     <?php endforeach;?>
+
+    <button onclick="history.go(-1);">Back </button>
 </ul>
 
 </body>

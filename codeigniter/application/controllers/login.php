@@ -12,11 +12,11 @@ class Login extends CI_Controller {
 		if ($result->num_rows() > 0){
 			redirect(profile);
 		}
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username', 'username', 'required', array('required' => 'Please enter your %s.'));
-		$this->form_validation->set_rules('password', 'password', 'required', array('required' => 'You must provide a %s.'));
+		$this->load->library('form_validation', NULL, "loginform");
+		$this->loginform->set_rules('username', 'username', 'trim|required|alpha_dash', array('required' => 'Please enter your %s.'));
+		$this->loginform->set_rules('password', 'password', 'trim|required|alpha_dash', array('required' => 'You must provide a %s.'));
 
-		if ($this->form_validation->run() == FALSE) {
+		if ($this->loginform->run() == FALSE) {
 			$this->load->view('loginpage');
 		}
 		else{
@@ -52,6 +52,7 @@ class Login extends CI_Controller {
 			$data['username'] = $result->result_array()[0]['username'];
 			$data['superuser'] = $result->result_array()[0]['superuser'];
 			$this->session->set_userdata('userinfo', $data);
+			$this->session->set_userdata($this->session->session_id, $data['username']);
 			redirect('profile');
 		}
 		else {
