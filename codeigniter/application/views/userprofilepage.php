@@ -6,8 +6,8 @@
 <body>
 
 <?php 
-	if (isset($alert)){
-		echo $alert;
+	if ($this->session->flashdata('alert')){
+		echo $this->session->flashdata('alert');
 		echo "<br><br>";
 	}
 ?>

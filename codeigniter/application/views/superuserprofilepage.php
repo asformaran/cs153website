@@ -19,11 +19,10 @@ Birthday: <?php echo "$birthday"; ?> <br>
 
 <button onclick="location.href='<?php echo base_url();?>profile/onlineusers'">View Online</button>
 <button onclick="location.href='<?php echo base_url();?>profile/editself'">Edit Info</button>
-<button onclick="location.href='<?php echo base_url();?>profile/superview'">View Users</button>
+<button onclick="location.href='<?php echo base_url();?>profile/superpriv'">Edit User Privileges</button>
 <button onclick="location.href='<?php echo base_url();?>profile/superadd'">Create User</button>
-<button onclick="location.href='<?php echo base_url();?>profile/superview'">Update User</button>
-<button onclick="location.href='<?php echo base_url();?>profile/superview'">Edit User</button>
-<button onclick="location.href='<?php echo base_url();?>profile/superview'">Delete User</button>
+<button onclick="location.href='<?php echo base_url();?>profile/superedit'">Edit User</button>
+<button onclick="location.href='<?php echo base_url();?>profile/superdelete'">Delete User</button>
 <button onclick="location.href='<?php echo base_url();?>profile/logout'">Log Out</button>
 
 </body>
